@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="RecetaIlustrada: recetas accesibles, nutrición e inclusión alimentaria.">
+<title>RecetaIlustrada — Tablón de Recetas Visuales</title>
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<canvas id="cursorParticles" aria-hidden="true"></canvas>
+<section class="ods2-intro" aria-labelledby="ods2-title">
+  <div class="ods2-symbol">🌾</div>
+  <div>
+    <span class="ods2-kicker">NUESTRO PROPÓSITO</span>
+    <h2 id="ods2-title">Juntos por el <strong>Objetivo de Desarrollo Sostenible 2 de la ONU</strong></h2>
+    <p>Hambre Cero: compartimos recetas económicas, nutritivas e ilustradas para promover el acceso a una alimentación suficiente, saludable e inclusiva.</p>
+  </div>
+  <div class="ods2-badge">ODS 2<br><small>Hambre Cero</small></div>
+</section>
+
+<header><div class="nav-container"><div class="logo">🎨 RecetaIlustrada</div><button class="btn" onclick="openModal()">＋ Publicar en el Tablón</button></div></header>
+
+<div class="layout-container">
+<main>
+<section class="hero">
+<h1>🍲 Comparte, Aprende y Alimenta · Por el ODS 2: Hambre Cero</h1>
+<p>Descubre recetas nutritivas, ilustraciones accesibles y propuestas comunitarias para construir un futuro con una alimentación más inclusiva.</p>
+<div style="margin-top:1.5rem"><button class="btn" onclick="openModal()">✨ Comparte tu receta</button></div>
+</section>
+
+<div class="tabs">
+<button class="tab-btn active" onclick="switchTab(event,'explore')">📋 Tablón de Recetas</button>
+</div>
+
+<div id="explore" class="view-content active">
+<div style="margin:1rem 0;padding:.9rem 1rem;border-radius:14px;background:#fff8e1;border:1px solid #ffe082;color:#6d4c41;font-size:.9rem">
+💾 <strong>Tus recetas se guardan automáticamente</strong> en este navegador, incluso después de cerrar la página.
+</div>
+<div class="stats-panel" aria-label="Estadísticas de la comunidad">
+<div class="impact-stat"><strong id="totalRecipes">0</strong><span>Recetas compartidas</span></div>
+<div class="impact-stat"><strong id="illustratedRecipes">0</strong><span>Recetas ilustradas</span></div>
+<div class="impact-stat"><strong id="pendingIllustrations">0</strong><span>Por ilustrar</span></div>
+<div class="impact-stat"><strong id="contributors">0</strong><span>Colaboradores</span></div>
+</div>
+<div class="toolbar">
+<input id="searchInput" type="search" placeholder="🔍 Buscar recetas, autores..." oninput="renderPosts()">
+<select id="categoryFilter" onchange="renderPosts()"><option value="">Todas las categorías</option><option>Comedor Comunitario</option><option>Ilustrador Voluntario</option><option>Comunidad</option></select>
+</div>
+<section class="random-discover" aria-labelledby="randomTitle">
+<h2 id="randomTitle">🎲 ¿Qué quieres descubrir?</h2>
+<p>Deja que RecetaIlustrada elija al azar una de estas 3 posibilidades.</p>
+<button class="btn" type="button" onclick="randomDiscover()">✨ Sorpréndeme</button>
+<div id="randomResult" class="random-result empty" aria-live="polite">Presiona el botón para descubrir algo.</div>
+</section>
+
+<div class="grid" id="requestsGrid"></div>
+</div>
+
+</div>
+</main>
+
+<aside class="sidebar">
+<div class="ods-header"><div class="ods-badge">2</div><div><h3 style="font-size:1.1rem;line-height:1.2">ODS 2: Hambre Cero</h3><small style="color:var(--muted)">Agenda 2030 (ONU)</small></div></div>
+<p style="font-size:.85rem;color:var(--muted);margin-bottom:1rem">RecetaIlustrada impulsa la educación alimentaria, la inclusión y el intercambio de conocimientos dentro de la comunidad.</p>
+<div class="stat-box"><div class="stat-number">735 M</div><div class="stat-label">Personas sufrieron hambre crónica en el mundo, según estimaciones de la ONU para 2022.</div></div>
+<div class="stat-box" style="border-left-color:var(--primary)"><div class="stat-number" style="color:var(--primary)">2,400 M</div><div class="stat-label">Personas enfrentaron inseguridad alimentaria moderada o grave en estimaciones globales.</div></div>
+<div class="stat-box" style="border-left-color:#d32f2f"><div class="stat-number" style="color:#d32f2f">763 M</div><div class="stat-label">Cifra de referencia incluida en la propuesta original sobre barreras de alfabetización.</div></div>
+<h4 style="font-size:.95rem;margin-top:1.2rem">Meta del Proyecto:</h4>
+<ul class="ods-list"><li><strong>Meta 2.1:</strong> Promover el acceso a alimentos sanos, nutritivos y suficientes.</li><li><strong>Meta 2.2:</strong> Apoyar la educación nutricional y la prevención de la malnutrición.</li></ul>
+</aside>
+</div>
+
+
+<section style="max-width:1400px;margin:0 auto 2rem;padding:0 1.5rem;">
+  <div style="background:white;border:1px solid #f5eee8;border-radius:24px;padding:2rem;box-shadow:var(--shadow);text-align:center;">
+    <h2 style="color:#e65100;margin-bottom:.6rem;">🌱 Construyamos una comunidad que comparte</h2>
+    <p style="color:var(--muted);max-width:720px;margin:0 auto 1.4rem;">
+      Cada receta, consejo o ilustración puede ayudar a que más personas aprendan,
+      cocinen y compartan de manera accesible.
+    </p>
+    <div style="display:flex;justify-content:center;gap:.7rem;flex-wrap:wrap;">
+      <button class="btn" onclick="openModal()">🍴 Publicar una receta</button>
+      <button class="btn" style="background:#388e3c" onclick="document.getElementById('searchInput').focus();window.scrollTo({top:0,behavior:'smooth'})">🔎 Explorar recetas</button>
+    </div>
+  </div>
+</section>
+
+<footer><h3>🎨 RecetaIlustrada</h3><p>Compartiendo recetas, creando inclusión y promoviendo una alimentación accesible.</p><p style="margin-top:1rem;font-size:.8rem;color:#bcaaa4">Proyecto comunitario · ODS 2: Hambre Cero</p></footer>
+
+<div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()"><div class="modal">
+<h3 style="margin-bottom:1rem;color:#e65100">Publicar Receta o Propuesta</h3>
+<form id="postForm" onsubmit="handleFormSubmit(event)">
+<div class="form-group"><label for="userType">Categoría</label><select id="userType"><option>Comedor Comunitario</option><option>Ilustrador Voluntario</option><option>Comunidad</option></select></div>
+<div class="form-group"><label for="authorInput">Autor / Organización</label><input id="authorInput" required placeholder="Ej. Comedor San José / Ana Gómez"></div>
+<div class="form-group"><label for="titleInput">Título del Platillo o Guía</label><input id="titleInput" required placeholder="Ej. Guisado de Lentejas Económico"></div>
+<div class="form-group"><label for="descInput">Instrucciones / Detalles</label><textarea id="descInput" rows="4" required placeholder="Ingredientes y pasos básicos..."></textarea></div>
+<div class="form-group"><label for="imageInput">Imagen o Lámina (opcional)</label><input type="file" id="imageInput" accept="image/*"></div>
+<div style="display:flex;gap:.5rem;justify-content:flex-end"><button type="button" class="btn" style="background:#6c757d" onclick="closeModal()">Cancelar</button><button class="btn" type="submit">Publicar</button></div>
+</form></div></div>
+
+
+<div class="modal-overlay" id="illustrationModal" onclick="if(event.target===this)closeIllustrationModal()">
+<div class="modal">
+<h3 style="margin-bottom:1rem;color:#e65100">🎨 Ilustrar una receta</h3>
+<p id="illustrationTarget" style="color:var(--muted);margin-bottom:1rem"></p>
+<form id="illustrationForm" onsubmit="submitIllustration(event)">
+<div class="form-group"><label for="illustratorName">Tu nombre</label><input id="illustratorName" required placeholder="Ej. Carlos / Equipo voluntario"></div>
+<div class="form-group"><label for="illustrationFile">Sube tu ilustración</label><input id="illustrationFile" type="file" accept="image/*" required><small style="color:var(--muted)">La imagen se asociará automáticamente a la receta pendiente.</small></div>
+<div class="form-group"><label for="illustrationNote">Descripción breve (opcional)</label><textarea id="illustrationNote" rows="3" placeholder="Describe tu ilustración..."></textarea></div>
+<div style="display:flex;gap:.5rem;justify-content:flex-end"><button type="button" class="btn" style="background:#6c757d" onclick="closeIllustrationModal()">Cancelar</button><button class="btn" type="submit">Subir ilustración</button></div>
+</form></div></div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
